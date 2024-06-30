@@ -17,7 +17,7 @@ function startCall(type) {
     const videoContainer = document.getElementById('video-container');
     videoContainer.style.display = 'block';
 
-    peer = new Peer();
+    peer = new Peer('${topic}-${type}-call');
 
     peer.on('open', id => {
         console.log('Peer ID: ', id);
@@ -41,7 +41,7 @@ function joinCall(type) {
 
     peer.on('open', id => {
         console.log('Peer ID: ', id);
-        call = peer.call(id, localStream);
+        call = peer.call('${topic}-${type}-call', localStream);
         call.on('stream', remoteStream => {
             const remoteVideo = document.getElementById('remote-video');
             remoteVideo.srcObject = remoteStream;
